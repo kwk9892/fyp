@@ -12,3 +12,4 @@ opencv-python
 imageai
 gunicorn==19.7.0
 pickle
+sklearn
