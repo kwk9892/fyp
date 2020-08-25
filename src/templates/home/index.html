@@ -1,0 +1,554 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block head %}
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>@{{ profiles.0.profile_username }} report</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width">
+{% endblock head %}
+
+{% block body %}
+
+<body lang="en">
+  <div id="hype-container" class="hype-container js-hype-container">
+    {% include "home/search_bar.html" %}
+    <div id="hype-page">
+      <div id="hype-content">
+        <div class="kyb-container report-page kyb-web-theme" itemscope="" itemtype="http://schema.org/Person">
+          <div class="report__tabs report-profile-tabs --inline">
+            <div class="report__tabs_wrap">
+              <ul class="report-profile-tabs--list">
+                <li class="report-profile-tabs--list-item report-profile-tabs--list-item-active" data-type="instagram" data-id="{{ profiles.0.profile_username }}">
+                  <a title="{{ profiles.0.profile_name }}" data-navigo=""
+                    href="{% url 'instagram_profile_view' profile_username=profiles.0.profile_username %}"
+                    onclick="if (!window.__cfRLUnblockHandlers) return false; KYB.report.payConfirm(event, this);">
+                    <img src="{{ profiles.0.profile_pic }}"
+                      class="report-profile-tabs--list-item-ava">
+                    <div class="report-profile-tabs--list-item-info">
+                      <strong class="report-profile-tabs--list-item-name">
+                        @{{ profiles.0.profile_username }} </strong>
+                    </div>
+                    <div class="channel-icon instagram-icon"></div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content" class="kyb-content js-kyb-content">
+            <div id="report-instagram" class="kyb-col kyb-col--mt-24">
+
+
+              <div class="kyb-user-info-v2 kyb-user-info-v2--v1">
+                <div class="kyb-user-info-v2__el kyb-user-info-v2__el--ava-wr user-ava-animate"
+                  onclick="if (!window.__cfRLUnblockHandlers) return false; KYB.awards.stories.popupShow(&#39;avatar&#39;); return false;">
+                  <a target="_blank" href="https://www.instagram.com/{{ profiles.0.profile_username }}/" class="kyb-user-ava">
+                    <img src="{{ profiles.0.profile_pic }}" class="kyb-user-ava--img"
+                      alt="{{ profiles.0.profile_name }}" title="{{ profiles.0.profile_name }}">
+                  </a>
+                  <svg id="stories-animate-mask" viewBox="0 0 108 108" xmlns="http://www.w3.org/2000/svg"
+                    xml:space="preserve">
+                    <circle cx="54" cy="54" r="52"></circle>
+                  </svg>
+                  <div class="achievement-ico achievement-ico-type-3 achievement-ico-10">
+                    <div class="achievement-ico-global"></div>
+                  </div>
+                </div>
+                <div class="kyb-user-info-v2__el kyb-user-info-v2__el--er">
+                  <div class="kyb-user-info-v2__title kyb-tooltip-target hype-ttip-el" data-statid="ER"
+                    data-ttip-position="left" title="">ER</div>
+                  <div class="kyb-user-info-v2__sub-title">{{ average_post_er|floatformat:2 }}%</div>
+                </div>
+                <div class="kyb-user-info-v2__el kyb-user-info-v2__el--followers">
+                  <div class="kyb-user-info-v2__title">Followers</div>
+                  <div class="kyb-user-info-v2__sub-title">{{ profiles.0.profile_followers }}</div>
+                </div>
+                <div class="kyb-user-info-v2__el kyb-user-info-v2__el--personal with-location">
+                  <a href="https://www.instagram.com/{{ profiles.0.profile_username }}/" target="_blank">@{{ profile.0.profile_username }}</a>
+                  <i class="fas fa-badge-check ig-verified-bage"></i>
+                  <span class="report-header--info-blogger"><i class="fas fa-map-marker-alt"></i> Malaysia</span>
+                  <br>
+                  <h1 class="kyb-user-info-v2__name" itemprop="name">{{ profiles.0.profile_name }}</h1>
+
+                  <div class="kyb-user-info--topics">
+                    <div class="kyb-user-info--topic">Shows</div>
+                    <div class="kyb-cursor-p kyb-edit-topics--btn"
+                      onclick="if (!window.__cfRLUnblockHandlers) return false; KYB.editTopics(&#39;kimkardashian&#39;, this);"
+                      title="Edit topics"><i class="fas fa-pen"></i></div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="kyb-report-day">
+                <span itemprop="dateModified" datetime="{% now "d N Y" %}">Last logged in: {{ user.last_login }}</span>
+              </div>
+
+              <div class="kyb-charts-box">
+              <div class="report-demography-wrap">
+
+              <div class="kyb-divider mt-xxl"></div>
+              <div id="hype-report-growth" class="kyb-title-group">
+                <h2 class="kyb-report-header-h2">Growth</h2>
+              </div>
+
+              <div id="hype-report-followers" class="kyb-axe-block mv-xxl">
+                <h2 class="kyb-axe-block__l-side">Daily growth</h2>
+                <div class="kyb-axe-block__r-side">
+                  <h2 class="kyb-dot kyb-dot--good">
+                    {{ daily_growth_rate|floatformat:4 }}%
+                  </h2>
+                  <div class="kyb-result-caption mt-s">
+                    @{{ profiles.0.profile_username }} grew by <b>{{ daily_growth }} followers</b> compared to yesterday
+                  </div>
+                </div>
+              </div>
+
+              <div id="hype-report-followers" class="kyb-axe-block mv-xxl">
+                <h2 class="kyb-axe-block__l-side">Followers growth</h2>
+                <div class="kyb-axe-block__r-side">
+                  <h2 class="kyb-dot kyb-dot--great">
+                    Organic </h2>
+                  <div class="kyb-result-caption mt-s">
+                    No abnormal growths or negative trends detected on followers graphs. </div>
+                    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+                    <canvas id="myChart"></canvas>
+
+                    <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            labels: [
+                            {% for profile in profiles reversed %}
+                              moment('{{ profile.profile_date|date:"Y-m-d" }}').format('DD-MM-YYYY'),
+                            {% endfor %}
+                            ],
+                            datasets: [{
+                                label: '{{ profiles.0.profile_username }} followers growth',
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: [
+                                {% for profile in profiles reversed %}
+                                  {t: moment('{{ profile.profile_date|date:"Y-m-d" }}'), y:{{ profile.profile_followers }} },
+                                  {% endfor %}
+                                ]
+                            }]
+                        },
+
+                        // Configuration options go here
+                        options: {}
+                    });
+                    </script>
+                </div>
+              </div>
+              <div class="kyb-axe-block mv-xxl">
+                <h2 class="kyb-axe-block__l-side">Following dynamics</h2>
+                <div class="kyb-axe-block__r-side">
+                  <h2 class="kyb-dot kyb-dot--great">
+                    Organic </h2>
+                  <div class="kyb-result-caption mt-s">
+                    No "incentivized following" patterns detected on following graph. </div>
+                    <canvas id="followingsChart"></canvas>
+
+                    <script>
+                    var ctx = document.getElementById('followingsChart').getContext('2d');
+                    var chart = new Chart(ctx, {
+                        // The type of chart we want to create
+                        type: 'line',
+
+                        // The data for our dataset
+                        data: {
+                            labels: [
+                            {% for profile in profiles reversed %}
+                              moment('{{ profile.profile_date|date:"Y-m-d" }}').format('DD-MM-YYYY'),
+                            {% endfor %}
+                            ],
+                            datasets: [{
+                                label: '{{ profiles.0.profile_username }} followings growth',
+                                backgroundColor: 'rgb(255, 99, 132)',
+                                borderColor: 'rgb(255, 99, 132)',
+                                data: [
+                                  {% for profile in profiles reversed %}
+                                  {t: moment('{{ profile.profile_date|date:"Y-m-d" }}'), y:{{ profile.profile_followings }} },
+                                  {% endfor %}
+                                ]
+                            }]
+                        },
+
+                        // Configuration options go here
+                        options: {}
+                    });
+                    </script>
+                </div>
+              </div>
+
+
+
+              <div class="kyb-divider mt-xxl"></div>
+              <div class="kyb-page-break"></div>
+              <div id="hype-report-engagement" class="kyb-title-group">
+                <h2 class="kyb-report-header-h2">
+                  Engagement </h2>
+
+                <div class="kyb-title-group__el kyb-title-group__el--desc">
+                  Compared to average values for similar accounts (by number of followers) </div>
+              </div>
+
+
+              <div class="kyb-axe-block mb-xxl">
+                <div class="kyb-axe-block__l-side"></div>
+                <div class="kyb-axe-block__r-side i-table i-table--inline i-table--s-40 i-table--pull">
+                  <div class="i-table__cell">
+                    <div class="kyb-result-caption kyb-result-caption--v2">
+                      Avg Likes </div>
+                    <h2>
+                      {{ average_post_likes|floatformat:1 }} 
+                    </h2>
+                  </div>
+                  <div class="i-table__cell">
+                    <div class="kyb-result-caption kyb-result-caption--v2">
+                      Avg Comments </div>
+                    <h2>
+                      {{ average_post_comments|floatformat:1 }}
+                    </h2>
+                  </div>
+                </div>
+              </div>
+
+              <div class="kyb-axe-block mv-xxl">
+                <h2 class="kyb-axe-block__l-side">
+                  Engagement Rate<br>
+                  
+                </h2>
+                <div class="kyb-axe-block__r-side">
+                  <h2 class="kyb-dot kyb-dot--excellent">
+                    {{ average_post_er|floatformat:2 }}%
+                    Excellent</h2>
+                  <div class="kyb-result-caption mt-s">
+                    <b>{{ average_post_er|floatformat:2 }}%</b> of audience like or comment the content
+                  </div>
+                </div>
+              </div>
+
+              <div class="kyb-axe-block mt-xl mb-xxl">
+                <div class="kyb-axe-block__l-side"></div>
+                <div class="kyb-axe-block__r-side">
+                <canvas id="engagementChart"></canvas>
+
+                    <script>
+                    new Chart(document.getElementById("engagementChart"), {
+                      type: 'bar',
+                      data: {
+                        labels: [
+                          {% for post in posts %}
+                            "{{ post.post_shortcode }}",
+                          {% endfor %}
+                        ],
+                        datasets: [
+                          {
+                            label: "Instagram posts engagement",
+                            backgroundColor: ["#85dfbd", "#c692ab", "#7826d3", "#e53496", "#9b2eac", "#9332d5", "#e28f37", "#d46520", "#3e8e9b", "#fdcc1b", "#fbd77d", "#800fcd"],
+                            data: [
+                              {% for post in posts %}
+                                {{post.post_er}},
+                              {% endfor %}
+                            ]
+                          }
+                        ]
+                      },
+                      options: {
+                        legend: { display: false },
+                        title: {
+                          display: true,
+                          text: '{{ profiles.0.profile_username }}\'s 12 Latest instagram post engagement'
+                        }
+                      }
+                  });
+                    </script>
+                  
+                </div>
+              </div>
+
+              <div class="kyb-divider mt-xxl"></div>
+              <div class="kyb-page-break"></div>
+              <div id="hype-report-engagement" class="kyb-title-group">
+                <h2 class="kyb-report-header-h2">
+                  Audience </h2>
+              </div>
+
+
+              <div class="kyb-axe-block mb-xxl">
+                <div class="kyb-axe-block__l-side"></div>
+                <div class="kyb-axe-block__r-side i-table i-table--inline i-table--s-40 i-table--pull">
+                  
+                </div>
+              </div>
+
+              <div class="kyb-axe-block mv-xxl">
+                <h2 class="kyb-axe-block__l-side">
+                  Audience Demographic<br>
+                  
+                </h2>
+                <div class="kyb-axe-block__r-side">
+                  <h2 class="kyb-dot kyb-dot--excellent">
+                    {{ average_post_er|floatformat:2 }}%
+                    Excellent</h2>
+                </div>
+              </div>
+              <div class="kyb-axe-block mt-xl mb-xxl">
+                <canvas id="genderChart"></canvas>
+                    <script>
+                    new Chart(document.getElementById("genderChart"), {
+                      type: 'bar',
+                      data: {
+                        labels: [ 
+                          {% for metrics in profile_metrics.demographics %}
+                            "{{metrics.identifier}}",
+                          {% endfor %} 
+                        ],
+                        datasets: [
+                            {
+                                label: "Male",
+                                backgroundColor: "blue",
+                                data: [
+                                  {% for metrics in profile_metrics.demographics %}
+                                    "{{metrics.male}}",
+                                  {% endfor %} 
+                                ]
+                            },
+                            {
+                                label: "Female",
+                                backgroundColor: "red",
+                                data: [
+                                  {% for metrics in profile_metrics.demographics %}
+                                    "{{metrics.female}}",
+                                  {% endfor %} 
+                                ]
+                            },
+                        ]
+                      },
+                      options: {
+                        legend: { display: true },
+                        title: {
+                          display: true,
+                          text: '{{ profiles.0.profile_username }}\'s 12 Latest instagram post engagement'
+                        },
+                        scales: {
+                          yAxes: [{
+                            scaleLabel: {
+                              display: true,
+                              labelString: 'Percentage (%)',
+                            },
+                            ticks: {
+                              beginAtZero: true,
+                              max: 100,
+                            }
+                          }],
+                          xAxes: [{
+                            scaleLabel: {
+                              display: true,
+                              labelString: 'Age',
+                            },
+                          }]
+                        },
+                      }
+                  });
+                    </script>
+              </div>
+
+              <div class="kyb-axe-block mv-xxl">
+                <h2 class="kyb-axe-block__l-side">
+                  Audience Interests<br>
+                  
+                </h2>
+                <div class="kyb-axe-block__r-side">
+                  
+                </div>
+              </div>
+          
+
+              <div class="kyb-axe-block mt-xl mb-xxl">
+                <canvas id="interestChart"></canvas>
+                    <script>
+                    new Chart(document.getElementById("interestChart"), {
+                      type: 'bar',
+                      data: {
+                        labels: [ 
+                          {% for metrics in profile_metrics.demographics %}
+                            "{{metrics.identifier}}",
+                          {% endfor %} 
+                        ],
+                        datasets: [
+                        {% for key, value in interest_metrics.items %}
+                          {
+                            label: "{{key}}",
+                            backgroundColor: "{{ colors|index:forloop.counter0 }}",
+                            data: [ {% for v in value %}"{{v}}",{% endfor %} ]
+                          },
+                        {% endfor %}
+                        ]
+                      },
+                      options: {
+                        legend: { display: true },
+                        title: {
+                          display: true,
+                          text: '{{ profiles.0.profile_username }} \'s audience interest '
+                        },
+                        scales: {
+                          yAxes: [{
+                            scaleLabel: {
+                              display: true,
+                              labelString: 'Percentage (%)',
+                            },
+                            ticks: {
+                              beginAtZero: true,
+                              max: 100,
+                            }
+                          }],
+                          xAxes: [{
+                            scaleLabel: {
+                              display: true,
+                              labelString: 'Age',
+                            },
+                          }]
+                        },
+                      }
+                  });
+                    </script>
+              </div>
+
+                </div>
+              </div>
+              <div class="kyb-divider mb-xxl"></div>
+                <h2>Top engaging posts</h2>
+                <div class="hype-tracking--content">
+                {% for post in posts %}
+                    <div class="hype-tracking--content-item">
+                      <a href="https://www.instagram.com/p/{{ post.post_shortcode }}" target="_blank"
+                        class="hype-tracking--content-item-link">
+                        <div class="skeleton-screen white"></div>
+                        <div class="hype-tracking--content-item-img" data-image=""
+                          style="background-image: url({{post.post_image}});">
+                        </div>
+                        <div class="hype-tracking--content-item-info">
+                          <i class="fas fa-heart"></i> {{ post.post_likes_count }}
+                          <i class="fas fa-comment"></i> {{ post.post_comments_count }}
+                        </div>
+                        <i class="fas fa-external-link"></i>
+                      </a>
+                      <div class="hype-tracking--content-item-er">ER <strong>{{ post.post_er|floatformat:2 }}%</strong></div>
+                      <div class="hype-tracking--content-item-er">Contains <strong>{{ post.post_image_category }}</strong></div>
+                    </div>
+                {% endfor %}
+                  </div>
+
+              <div id="report-lookalike" class="report-lookalike-block js-report-lookalike">
+                <div class="kyb-divider mb-xxl"></div>
+                <h2 class="kyb-report-header-h2"><span class="hype-new-label">NEW</span> Similar accounts</h2>
+                <ul class="report-lookalike__list js-instagram-similar-list">
+                {% for random in random_profiles %}
+                  <li>
+                    <a href="{% url "instagram_profile_view" profile_username=random.profile_username %} " data-navigo=""
+                      class="report-lookalike__item js-report-lookalike-item" title="{{ random.profile_name }}">
+                      <img class="report-lookalike__avatar"
+                        src="{{ random.profile_pic }}" alt="{{ random.profile_username }}">
+                      <div class="report-lookalike__btn button button-small">View report <i
+                          class="ico ico-token-white"></i> 1</div>
+                      <h3 class="report-lookalike__username ellipsis">@{{ random.profile_username }}</h3>
+                      <div class="report-lookalike__name">{{ random.profile_name }}</div>
+                      <div class="report-lookalike__estimation">{{ random.profile_followers }} followers</div>
+                    </a>
+                  </li>
+                {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <div id="report-tab-content"></div>
+            <div class="kyb-second-form kyb-second-form--m0 kyb-gray-block">
+              <div class="kyb-second-form__title mb-l">
+                Check Another Influencer </div>
+              <form class="js-username-form kyb-user-form hype-channels-suggest--form"
+                action="{{domain}}" method="get" autocomplete="off">
+                <div class="hype-channels-suggest--form-fields">
+                  <input class="js-email-hidden" type="text" name="email" value="">
+                  <input name="username" class="field-input" type="text" required="" value="" spellcheck="false"
+                    autocorrect="off" autocapitalize="off" autocomplete="off" aria-label="Analyze Instagram username"
+                    placeholder="Enter Instagram, YouTube or TikTok account">
+                </div>
+                <button type="submit" class="button">Check</button>
+                <div class="get-report-form--caption">
+                  Over 1,000 followers only </div>
+                <div class="kyb-search-bar--results"></div>
+              </form>
+            </div>
+            <div class="kyb-report-disclaimer">
+              Report results rely on statistics, might be used only for reference and can not be used for legal
+              purposes. We don't claim that the reports result are absolutely accurate. By saying "advertising post" we
+              do not state that all brand mentions of the blogger were paid by corresponding brands, posts might have
+              been made as a gratitude or free promotion.<br>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var $kybAudienceThematicLi = document.querySelectorAll('#kyb-audience-thematic li');
+    if ($kybAudienceThematicLi.length > 3) {
+      var $kybAudienceThematicLiH = Array.prototype.slice.call($kybAudienceThematicLi).slice(3, $kybAudienceThematicLi
+        .length);
+      var $kybAudienceThematicLiS = document.createElement('li');
+      $kybAudienceThematicLiS.className = 'kyb-audience-thematic--view-all';
+      $kybAudienceThematicLiS.innerHTML = '<div class="kyb-jslink">View all</div>';
+      $kybAudienceThematicLiS.addEventListener('click', function () {
+        $kybAudienceThematicLiS.remove();
+        _.each($kybAudienceThematicLiH, function (li) {
+          li.classList.remove('kyb-audience-thematic--h');
+        });
+
+        KYB.tracker.trackEvent('Page Action', {
+          'Page Id': KYB.pageId,
+          'Action': 'tap',
+          'Target': "View All Themes"
+        });
+      }, {
+        once: true
+      });
+      _.each($kybAudienceThematicLiH, function (li) {
+        li.classList.add('kyb-audience-thematic--h');
+      });
+      $kybAudienceThematicLi[0].parentNode.insertBefore($kybAudienceThematicLiS, $kybAudienceThematicLi[3]);
+    }
+
+
+    _.each(document.querySelectorAll('.kyb-report-tabs--item'), function (t) {
+      t.addEventListener('click', function () {
+        var parent = t.parentNode;
+        var items = parent.querySelectorAll('.kyb-report-tabs--item');
+        var tabs = parent.nextElementSibling.querySelectorAll('.kyb-report-tab');
+        var ic = 'kyb-report-tabs--item-active';
+        var tc = 'kyb-report-tab--active';
+        var curr = _.indexOf(items, t);
+        _.each(items, function (item, i) {
+          if (i == curr) {
+            item.classList.add(ic);
+            tabs[i].classList.add(tc);
+          } else {
+            item.classList.remove(ic);
+            tabs[i].classList.remove(tc);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+<!-- Cached at {% now "jS F Y H:i" %} -->
+{% endblock body %}
