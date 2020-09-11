@@ -12,3 +12,8 @@ jobs:
         run: |
           node -v
           npm -v
+      - name: python stuff
+        run: |
+        import random
+        print(random.__dir__())
+        shell: python
