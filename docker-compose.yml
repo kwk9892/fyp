@@ -7,10 +7,10 @@ services:
     # need to add gunicorn
     #command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate --fake"
     command: |
-      bash -c "python3 manage.py makemigrations 
+      bash -c "python3 manage.py makemigrations"
       python3 manage.py migrate 
       python3 manage.py collectstatic --noinput
-      gunicorn ${APP_NAME}.wsgi:application --reload --log-level DEBUG --bind 0.0.0.0:8000"
+      gunicorn ${APP_NAME}.wsgi:application --reload --log-level DEBUG --bind 0.0.0.0:8000
     volumes:
       - ./src:/app/src
       - staticfiles:/app/src/staticfiles
