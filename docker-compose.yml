@@ -48,8 +48,8 @@ services:
       #- ./file.sql:/docker-entrypoint-initdb.d/file.sql
       #- /root/mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=$${DB_PW}
-      - MYSQL_DATABASE=$${DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DB_PW}
+      - MYSQL_DATABASE=${DB_NAME}
     restart: always
 volumes:
   mysql:
