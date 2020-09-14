@@ -15,6 +15,8 @@ jobs:
           port: 22
           script: |
             mkdir asd
-            cd asd && git clone https://github.com/${{ github.repository }}
-            cd fyp && ls -la
+            cd asd
+            git clone https://github.com/${{ github.repository }}
+            cd fyp
+            ls -la
             docker-compose up -d
