@@ -1,4 +1,4 @@
-name: Shell commands
+name: SSH Docker Build
 
 on: [push]
 
