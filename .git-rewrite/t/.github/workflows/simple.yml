@@ -1,0 +1,19 @@
+name: Shell commands
+
+on: [push]
+
+jobs: 
+  run-stuff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo a string
+        run: echo "Hello There"
+      - name: multiline script
+        run: |
+          node -v
+          npm -v
+      - name: python stuff
+        run: |
+          a = [x for x in range(100)]
+          print(a)
+        shell: python

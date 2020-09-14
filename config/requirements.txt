@@ -1,0 +1,14 @@
+tensorflow==1.15
+requests
+numpy
+matplotlib
+bleach
+pillow
+django
+djangorestframework
+mysqlclient
+keras==2.1.2
+opencv-python
+imageai
+gunicorn==19.7.0
+sklearn

@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image</title>
+{% endblock head %}
+{% block body %}
+    <body>
+        {% if msg %}
+            <h1>{{msg}}</h1>
+        {% endif %}
+        {% if input %}
+            <img src="{{ input }}">
+            <h2>Original</h2>
+        {% endif %}
+        {% if output %}
+            <img src="{{ output }}">
+            <h2>Detected</h2>
+        {% endif %}
+    </body>
+{% endblock body %}

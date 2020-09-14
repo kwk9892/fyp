@@ -1,0 +1,75 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block head %}
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>@{{ profiles.0.profile_username }} report</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width">
+{% endblock head %}
+
+{% block body %}
+
+<body lang="en">
+  <div id="hype-container" class="hype-container js-hype-container">
+    {% include "home/search_bar.html" %}
+    <div id="hype-page">
+      <div id="hype-content">
+        <div class="kyb-container report-page kyb-web-theme" itemscope="" itemtype="http://schema.org/Person">
+          <div id="content" class="kyb-content js-kyb-content">
+          
+            <div id="report-instagram" class="kyb-col kyb-col--mt-24">
+              <div id="report-lookalike" class="report-lookalike-block js-report-lookalike">
+                <h2 class="kyb-report-header-h2">
+                <span class="hype-new-label">NEW</span> Search: {{search_term}}
+                </h2>
+                <h2 class="kyb-report-header-h2">
+                <span class="hype-new-label">NEW</span> Predicted Category: {{predicted_label}}
+                </h2>
+                <ul class="report-lookalike__list js-instagram-similar-list">
+                {% for profile in profile_obj %}
+                  <li>
+                    <a href="{% url "instagram_profile_view" profile_username=profile.profile_username %} " data-navigo=""
+                      class="report-lookalike__item js-report-lookalike-item" title="{{ profile.profile_name }}">
+                      <img class="report-lookalike__avatar"
+                        src="{{ profile.profile_pic }}" alt="{{ profile.profile_username }}">
+                      <div class="report-lookalike__btn button button-small">View report <i
+                          class="ico ico-token-white"></i> 1</div>
+                      <h3 class="report-lookalike__username ellipsis">@{{ profile.profile_username }}</h3>
+                      <div class="report-lookalike__name">{{ profile.profile_name }}</div>
+                      <div class="report-lookalike__estimation">{{ profile.profile_followers }} followers</div>
+                    </a>
+                  </li>
+                {% endfor %}
+                </ul>
+            {% if profile_obj.has_other_pages %}
+              <ul class="pagination">
+                {% if profile_obj.has_previous %}
+                  <li><a href="?{% url_replace page=profile_obj.previous_page_number %}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in profile_obj.paginator.page_range %}
+                  {% if profile_obj.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li><a href="?{% url_replace page=i %}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if profile_obj.has_next %}
+                  <li><a href="?{% url_replace page=profile_obj.next_page_number %}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- Cached at {% now "jS F Y H:i" %} -->
+{% endblock body %}

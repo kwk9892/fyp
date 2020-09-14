@@ -1,0 +1,78 @@
+<div id="hype-sidebar" class="hype-sidebar js-sidebar">
+    <div id="hype-sidebar--wrap">
+    <div id="hype-preloader"><i id="hype-preloader-1"></i><i id="hype-preloader-2"></i><i id="hype-preloader-3"></i>
+    </div>
+    <a id="hype-logo" href="{% url 'index_view' %}" data-navigo="">
+        <div id="hype-logo--flame"></div>
+        <div id="hype-logo--text"></div>
+    </a>
+    <div class="hype-sidebar-toggle js-sidebar-toggle">
+        <i class="fal fa-thumbtack"></i>
+        <i class="fal fa-arrow-to-left"></i>
+    </div>
+
+    <ul id="hype-sidebar--menu">
+        <li class="hype-sidebar--menu-item" data-controller="dashboard">
+            <a href="{% url 'index_view' %}"
+                data-navigo="" class="hype-sidebar--menu-item-link"><i
+                    class="hype-sidebar--menu-item-ico fal fa-tachometer-alt-average"></i> <span
+                    class="hype-sidebar--menu-item-text">Dashboard</span>
+            </a>
+        </li>
+        <li class="hype-sidebar--menu-item" data-controller="Login">
+            <a href="{% url 'home:login_view' %}"
+                data-navigo="" class="hype-sidebar--menu-item-link"><i
+                    class="hype-sidebar--menu-item-ico fal fa-tachometer-alt-average"></i> <span
+                    class="hype-sidebar--menu-item-text">Login</span>
+            </a>
+        </li>
+        <li class="hype-sidebar--menu-item" data-controller="SignUp">
+            <a href="{% url 'home:signup_view' %}"
+                data-navigo="" class="hype-sidebar--menu-item-link"><i
+                    class="hype-sidebar--menu-item-ico fal fa-tachometer-alt-average"></i> <span
+                    class="hype-sidebar--menu-item-text">SignUp</span>
+            </a>
+        </li>
+        <li class="hype-sidebar--menu-item" data-controller="Logout">
+            <a href="{% url 'home:logout_view' %}"
+                data-navigo="" class="hype-sidebar--menu-item-link"><i
+                    class="hype-sidebar--menu-item-ico fal fa-tachometer-alt-average"></i> <span
+                    class="hype-sidebar--menu-item-text">Logout</span>
+            </a>
+        </li>
+        <li class="hype-sidebar--menu-item" data-controller="Image Classification">
+            <a href="{% url 'classification_view' %}"
+                data-navigo="" class="hype-sidebar--menu-item-link"><i
+                    class="hype-sidebar--menu-item-ico fal fa-tachometer-alt-average"></i> <span
+                    class="hype-sidebar--menu-item-text">Image Classification</span>
+            </a>
+        </li>
+    </ul>
+    </div>
+</div>
+<div id="hype-header">
+    <div class="hype-layout">
+    <div id="hype-header--search">
+        <form class="js-username-form kyb-user-form hype-channels-suggest--form"
+        action="{% url 'home:search_view' %}" method="get" autocomplete="off">
+        <div class="hype-channels-suggest--form-fields">
+            <input name="query" class="field-input" type="text" required="" value="" spellcheck="false"
+            autocorrect="off" autocapitalize="off" autocomplete="off" aria-label="Analyze Instagram username"
+            placeholder="What are you selling ?">
+        </div>
+        <button type="submit" class="button">Check</button>
+        <div class="get-report-form--caption">
+            Over 1,000 followers only </div>
+        <div class="kyb-search-bar--results"></div>
+        </form>
+    </div>
+
+    <div id="hype-mobile-sidebar-toggle">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-times"></i>
+    </div>
+    </div>
+    <div id="hype-header--preloader" class="hype-preloader-line">
+    <div id="hype-header--preloader-bar" class="hype-preloader-line-bar"></div>
+    </div>
+</div>
