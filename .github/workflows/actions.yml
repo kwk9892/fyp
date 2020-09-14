@@ -1,0 +1,20 @@
+name: Shell commands
+
+on: [push]
+
+jobs: 
+  run-stuff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: 22
+          script: |
+            mkdir asd
+            cd asd && git clone https://github.com/${{ github.repository }}
+            cd fyp && ls -la
+            docker-compose up -d
