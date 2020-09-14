@@ -11,10 +11,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-<<<<<<< HEAD
-=======
-
->>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
@@ -29,11 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ["insurtek.tech", "0.0.0.0"]
-=======
-ALLOWED_HOSTS = ["insurtek.tech"]
->>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
 DOMAIN = 'insurtek.tech'
 
 # Application definition
@@ -42,10 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-<<<<<<< HEAD
     'django.contrib.sitemaps',
-=======
->>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',

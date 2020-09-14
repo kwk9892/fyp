@@ -116,7 +116,6 @@ cache_page(None)
 class ClassificationView(LoginRequiredMixin, View):
     login_url = '/home/login/'
     def get(self, request):
-<<<<<<< HEAD
         response = {}
         image_url = request.GET.get('image_url', None)
         if image_url is None or image_url == '':
@@ -129,7 +128,6 @@ class ClassificationView(LoginRequiredMixin, View):
             response['msg'] = 'We ran into some error.....'
             return render(request, 'home/classification.html', response)
         fp = BytesIO()
-=======
         image_url = request.GET.get('image_url', None)
         if image_url is None or image_url == '':
             return HttpResponse("<h1>Params: image_url is empty</h1>")
@@ -137,7 +135,6 @@ class ClassificationView(LoginRequiredMixin, View):
         
         fp = BytesIO()
 
->>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
         img = Image.open(BytesIO(r.content))
         img = img.resize((500,500))
         img.save(fp, format='JPEG')
