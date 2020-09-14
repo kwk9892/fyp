@@ -80,9 +80,13 @@
                 </div>
               </div>
               <div class="kyb-report-day">
+<<<<<<< HEAD
                 {% if user.is_authenticated %}
                   <span itemprop="dateModified" datetime="{% now "d N Y" %}">Last logged in: {{ user.last_login }}</span>
                 {% endif %}
+=======
+                <span itemprop="dateModified" datetime="{% now "d N Y" %}">Last logged in: {{ user.last_login }}</span>
+>>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
               </div>
 
               <div class="kyb-charts-box">

@@ -2,7 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg, Max
 import random
+<<<<<<< HEAD
 from django.urls import reverse
+=======
+>>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
 # Create your models here.
 
 class Profile(models.Model):
@@ -14,8 +17,11 @@ class Profile(models.Model):
     def __str__(self):
         return self.profile_username
 
+<<<<<<< HEAD
     def get_absolute_url(self):
         return reverse('instagram_profile_view', args=[self.profile_username])
+=======
+>>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
 
 class ProfileStatsManager(models.Manager):
     def get_random_profiles(self, n=5):
@@ -29,6 +35,10 @@ class ProfileStatsManager(models.Manager):
         random_items = random.sample(profiles, n)
         return random_items
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
 class ProfileStats(models.Model):
 
     IS_VERIFIED = (
@@ -57,9 +67,12 @@ class ProfileStats(models.Model):
     def __str__(self):
         return self.profile_username
 
+<<<<<<< HEAD
     def get_absolute_url(self):
         return reverse('instagram_profile_view', args=[self.profile_username])
 
+=======
+>>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
     class Meta():
         ordering = ['-profile_stats_id']
 

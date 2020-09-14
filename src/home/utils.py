@@ -20,7 +20,11 @@ def send_email(request):
     email = request.user.email
     msg_content = f"""
     We noticed, you login from this ip address {ip_address}.
+<<<<<<< HEAD
     If you didn't do this, reset your password now: https://insurtek.tech/accounts/password_reset/
+=======
+    If you didn't do this, reset your password now: <a href="https://insurtek.tech/accounts/password_reset/"
+>>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
     If this is you, you can safely disregard this message
 """
     send_mail(

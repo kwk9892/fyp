@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from django.urls import include
 from home.views import index_view, instagram_profile_view, ClassificationView
 from django.views.decorators.cache import cache_page
+<<<<<<< HEAD
 from django.contrib.sitemaps import views as sitemap_view
 from home.sitemaps import ProfileSitemap
 from home.feeds import LatestProfileFeed
@@ -36,6 +37,13 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('rss/', LatestProfileFeed()),
+=======
+
+urlpatterns = [
+    path('', cache_page(None)(index_view), name='index_view'),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('admin/', admin.site.urls),
+>>>>>>> b5ae9fa1b230c2110589694cb7ae0ea230526ef1
     path('api/', include('api.urls', namespace='api')),
     path('home/', include('home.urls', namespace='home')),
     path('instagram/<str:profile_username>', cache_page(None)(instagram_profile_view), name='instagram_profile_view'),
