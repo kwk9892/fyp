@@ -18,5 +18,5 @@ jobs:
             cd asd
             git clone https://github.com/${{ github.repository }}
             cd fyp
-            ls -a
+            ls -la
             docker-compose up -d
