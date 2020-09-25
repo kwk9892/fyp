@@ -1,0 +1,70 @@
+version: '2.1'
+
+services:
+  web:
+    container_name: web
+    build: ./
+    command: bash -c "python3 manage.py makemigrations home && python3 manage.py migrate && python3 manage.py collectstatic --noinput && gunicorn ${APP_NAME}.wsgi:application --reload --log-level DEBUG --worker-class gevent --bind 0.0.0.0:8000"
+    volumes:
+      - ./src:/app/src
+      - staticfiles:/app/src/staticfiles
+    ports:
+      - 8000:8000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: "wget --quiet --tries=1 --spider http://0.0.0.0:8000/ || exit 1"
+      interval: 60s
+      timeout: 40s
+      retries: 1
+    env_file:
+      - .env
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  nginx:
+    container_name: nginx
+    image: nginx:1.15-alpine
+    restart: unless-stopped
+    volumes:
+      - ./config/nginx/:/etc/nginx/conf.d/
+      - ./config/certbot/conf:/etc/letsencrypt
+      - ./config/certbot/www:/var/www/certbot
+      - staticfiles:/app/src/staticfiles
+    depends_on:
+      web:
+        condition: service_healthy
+      certbot:
+        condition: service_started
+    ports:
+      - 80:80
+      - 443:443
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+      #- ./file.sql:/docker-entrypoint-initdb.d/file.sql
+      #- /root/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    restart: always
+    healthcheck:
+        test: "/usr/bin/mysql --user=$$MYSQL_USER --password=$$MYSQL_PASSWORD --execute \"SHOW DATABASES;\""
+        interval: 5s
+        timeout: 20s
+        retries: 10
+volumes:
+  mysql:
+  staticfiles:

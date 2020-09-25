@@ -1,0 +1,37 @@
+service: serverless
+# app and org for use with dashboard.serverless.com
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.6
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    useDownloadCache: false
+    zip: true
+    slim: true
+
+package:
+  #include:
+  #  - include-me.py
+  #  - include-me-dir/**
+  exclude:
+    - node_modules/**
+    - myenv/**
+
+functions:
+  endpoint:
+    handler: handler.endpoint
+    events:
+      - http:
+          path: get/data
+          method: get
+

@@ -1,0 +1,73 @@
+# name of our workflow
+name: Django Build
+
+# triggers for our workflow
+on:
+  # any code pushed to master and develop branch will also be a trigger
+  push:
+    branches:
+      - master
+
+# three job definition
+jobs:
+  health-check-job: # health check job for testing and code formatting check
+    runs-on: ubuntu-latest # os for running the job
+    
+    services:
+      mysql: # we need a mysql docker image to be booted a side car service to run the tests that needs a db
+        image: mysql:5.7
+        env: # the environment variable must match with app/settings.py if block of DATBASES variable otherwise test will fail due to connectivity issue.
+          MYSQL_USER: mysql
+          MYSQL_PASSWORD: mysql
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_HOST: mysql
+          MYSQL_DATABASE: fyp
+        ports:
+          - 3306:3306 # exposing 3306 port for application to use
+        # needed because the mysql container does not provide a healthcheck
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Checkout code # checking our the code at current commit that triggers the workflow
+        uses: actions/checkout@v2
+      - name: Cache dependency # caching dependency will make our build faster.
+        uses: actions/cache@v2 # for more info checkout pip section documentation at https://github.com/actions/cache
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Setup python environment # setting python environment to 3.x
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.6' # if you want multiple python version run just use matrix strategy in job config. See the documentation of GitHub Actions
+      - name: Check Python version # checking the python version to see if 3.x is installed.
+        run: python --version
+      - name: Install requirements # install application requirements
+        run: pip install -r config/requirements.txt
+      #- name: Check Syntax # check code formatting
+      #  run: pycodestyle --statistics .
+      - name: Run Migrations # run migrations to create table in side car db container
+        env:
+          MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
+        run: |
+          python src/manage.py makemigrations 
+          python src/manage.py migrate 
+      - name: Run Test # running tests
+        run: python src/manage.py test
+  deploy-job:
+    runs-on: ubuntu-latest
+    needs: [health-check-job]
+    if: success()
+    steps:
+      - name: SSH & Git Clone
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: 22
+          script: |
+            git clone https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_PASSWORD }}@github.com/${{ github.repository }}
+            cd fyp
+            git pull https://${{ secrets.GH_USERNAME }}:${{ secrets.GH_PASSWORD }}@github.com/${{ github.repository }} master
+            docker-compose up -d --force-recreate

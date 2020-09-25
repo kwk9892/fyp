@@ -1,0 +1,561 @@
+#bloggers-top-header {
+    text-align: center
+}
+
+#bloggers-top-header--desc {
+    max-width: 565px;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#bloggers-top-about {
+    font-size: 18px;
+    margin: 0 0 42px
+}
+
+#bloggers-top-about--link,
+.bloggers-top-report-link,
+.bloggers-top-report-link:hover,
+.bloggers-top-report-link:visited,
+.bloggers-top--search-back {
+    color: #fc4a31;
+    text-decoration: none
+}
+
+#bloggers-top-about p {
+    line-height: 28px
+}
+
+#bloggers-top-about--info {
+    display: none;
+    overflow: hidden;
+    padding: 30px 0 0 0
+}
+
+.bloggers-top-about--item {
+    text-align: left;
+    padding: 20px 16px 0 112px
+}
+
+.kyb-table-filter {
+    background: #eff3f6;
+    line-height: 32px;
+    font-size: 14px;
+    padding: 12px 24px 12px 19px;
+    margin: 0 0 16px;
+    min-height: 66px;
+    text-align: center
+}
+
+#bloggers-top-search {
+    float: right;
+    position: relative
+}
+
+#bloggers-top-last-upd {
+    color: #9a9a9a;
+    float: left;
+    text-align: left;
+    padding-top: 5px
+}
+
+#bloggers-top-last-upd .kyb-flame-logo {
+    margin: -5px 4px 0 0;
+    height: 21px;
+    width: 16px
+}
+
+#bloggers-top-last-upd .kyb-flame-logo:after {
+    height: 21px
+}
+
+.kyb-table-filter--item {
+    display: inline-block;
+    text-align: left;
+    margin: 0 12px;
+    white-space: nowrap
+}
+
+.kyb-table-filter--state {
+    display: inline-block
+}
+
+.bloggers-top-topic {
+    background: #eff3f6;
+    border-radius: 16px;
+    display: inline-block;
+    color: #9a9a9a;
+    padding: 7px 11px;
+    margin: 0 0 5px
+}
+
+.bloggers-top-ava--td {
+    font-size: 0
+}
+
+.bloggers-top-ava,
+#bloggers-top-search .kyb-suggest-avatar {
+    width: 44px;
+    height: 44px;
+    display: block;
+    margin-top: -2px;
+    margin-bottom: -2px;
+    border-radius: 50%;
+    background-color: #e1e8ee;
+    border: #e1e8ee solid 2px;
+    background-size: contain;
+    outline: none
+}
+
+#bloggers-top-search .instagram-icon,
+#bloggers-top-search .youtube-icon {
+    top: 33px;
+    left: 42px
+}
+
+.bloggers-top-table .bloggers-top-topics {
+    padding-left: 8px;
+    padding-bottom: 7px;
+    width: 25%
+}
+
+.bloggers-top-rank {
+    white-space: nowrap
+}
+
+.bloggers-top-name h4 {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0
+}
+
+.bloggers-top-name a {
+    display: block
+}
+
+.bloggers-top-report-link {
+    white-space: nowrap
+}
+
+.bloggers-top-table th,
+.bloggers-top-table td {
+    padding-left: 24px
+}
+
+.bloggers-top-table .t-a-r {
+    width: 100px
+}
+
+.bloggers-top-table .sorted {
+    background: rgba(229, 234, 235, 0.6)
+}
+
+.bloggers-top-table .bloggers-top-name {
+    padding-left: 0;
+    max-width: 230px
+}
+
+.bloggers-top-change-symbol {
+    color: #9a9a9a;
+    font-size: 14px
+}
+
+.bloggers-top-change-symbol .material-icons {
+    font-size: 20px;
+    margin-top: -1px
+}
+
+.bloggers-top-change-symbol--pos {
+    color: #2ecc71
+}
+
+.bloggers-top-change-symbol--neg {
+    color: #e74c3c
+}
+
+#bloggers-top-search .kyb-suggest--user-name {
+    font-size: 14px
+}
+
+#bloggers-top-search .kyb-suggest--user-link {
+    line-height: 20px;
+    padding: 8px 24px 8px 12px
+}
+
+#bloggers-top-search .fa-search {
+    position: absolute;
+    top: 17px;
+    right: 4px
+}
+
+#bloggers-top-search .kyb-suggest--user-link:after {
+    left: 0
+}
+
+#bloggers-top-search .fa-search,
+#bloggers-top-search.kyb-search-bar--form-focus .fa-search {
+    color: #9a9a9a;
+    display: none
+}
+
+#bloggers-top-search.kyb-search-bar--form-focus .kyb-input {
+    display: block
+}
+
+.bloggers-top-table--search-result tbody tr,
+.bloggers-top-table--search-result .kyb-pagination,
+.bloggers-top-table--search-result .bloggers-top-list--item {
+    display: none
+}
+
+.bloggers-top-table--search-result tr.bloggers-top--search-result {
+    display: table-row
+}
+
+.bloggers-top-table--search-result .bloggers-top--search-result {
+    display: block
+}
+
+.bloggers-top--search-back {
+    margin-top: 32px;
+    cursor: pointer;
+    text-align: center
+}
+
+.bloggers-top-calc {
+    color: #9a9a9a
+}
+
+.bloggers-top-topics .bloggers-top-calc {
+    padding-bottom: 4px;
+    display: inline-block
+}
+
+.kyb-table-header--fixed {
+    position: fixed;
+    top: 64px;
+    background: #fff
+}
+
+#bloggers-top-search .kyb-input {
+    width: 100%
+}
+
+#bloggers-top-search .kyb-input:disabled {
+    opacity: .25
+}
+
+#bloggers-top-search .kyb-input:disabled::-webkit-input-placeholder {
+    color: #333
+}
+
+#bloggers-top-search .kyb-input:disabled::-moz-placeholder {
+    color: #333
+}
+
+#bloggers-top-search .kyb-input:disabled::placeholder {
+    color: #333
+}
+
+#bloggers-top-list {
+    margin: 0 -16px 32px;
+    position: relative
+}
+
+.bloggers-top-list--item {
+    box-shadow: inset 0 -1px 0 #eeeeee;
+    padding: 24px 16px;
+    overflow: hidden
+}
+
+.bloggers-top-list--ava {
+    width: 48px;
+    height: 48px;
+    float: left;
+    margin: 2px 12px 12px -4px
+}
+
+.bloggers-top-list--name {
+    overflow: hidden;
+    padding-top: 2px
+}
+
+.bloggers-top-list--location {
+    color: #9a9a9a
+}
+
+.bloggers-top-list--location .fa-map-marker-alt {
+    font-size: 14px
+}
+
+.bloggers-top-list--item .bloggers-top-report-link {
+    float: right;
+    box-shadow: 0 0 0 1px #fc4a31;
+    font-size: 14px;
+    padding: 6px 16px;
+    margin-top: 4px;
+    border-radius: 4px;
+    clear: left
+}
+
+.bloggers-top-list--data {
+    color: #86939e;
+    float: left;
+    font-size: 14px;
+    line-height: 16px
+}
+
+.bloggers-top-list--data-followers {
+    margin-right: 24px
+}
+
+.bloggers-top-list--data-val {
+    color: #333;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 6px
+}
+
+.kyb-table-filter--item {
+    color: #333;
+    position: relative;
+    z-index: 4
+}
+
+.kyb-table-filter--sort-item {
+    float: right;
+    margin-right: 30px
+}
+
+.kyb-table-filter--item.disabled {
+    pointer-events: none
+}
+
+.kyb-table-filter--item.disabled .far {
+    display: none
+}
+
+.kyb-table-filter--item label {
+    text-transform: uppercase
+}
+
+.kyb-table-filter--sort-item label {
+    text-transform: none
+}
+
+.kyb-table-filter--item-wrap {
+    display: inline-block;
+    margin-left: 16px
+}
+
+.kyb-table-filter--item-wrap .select {
+    margin: 0 0 2px
+}
+
+.kyb-table .bloggers-top-change {
+    width: 0;
+    min-width: 0;
+    white-space: nowrap;
+    padding-left: 12px
+}
+
+#bloggers-top-filter--theme-list,
+#bloggers-top-filter--country-list,
+#bloggers-top-filter--order-by-list {
+    display: none
+}
+
+#top-interesting-msg {
+    background-color: #fdf3d8;
+    text-align: center;
+    margin-top: 24px;
+    padding: 16px;
+    font-size: 18px;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0);
+    transition: background-color .8s ease-in, opacity .4s ease-in, box-shadow .2s ease-in, transform .2s ease-in;
+    transform: translateY(10px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
+    color: #333
+}
+
+#top-interesting-msg .far {
+    opacity: .4;
+    margin-left: 16px;
+    font-size: 21px;
+    cursor: pointer;
+    position: absolute;
+    top: 16px;
+    left: 16px
+}
+
+#top-interesting-msg.show {
+    background-color: #fff;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    box-shadow: 0 -1px 8px 2px rgba(0, 0, 0, 0.1)
+}
+
+#top-interesting-msg .interesting-msg__action {
+    display: inline-block;
+    color: #ff6436;
+    cursor: pointer
+}
+
+#top-interesting-form .kyb-input {
+    margin: 0 0 16px;
+    width: 360px
+}
+
+.top-interesting-popup .kyb-popup-wrap {
+    width: 400px;
+    min-width: auto
+}
+
+@media (min-width: 1000px) {
+    #bloggers-top-about--link {
+        display: block
+    }
+
+    #bloggers-top-search {
+        transition: width .2s ease-in;
+        width: 175px
+    }
+
+    #bloggers-top-search.kyb-search-bar--form-focus {
+        width: 280px
+    }
+
+    #bloggers-top-about--info-wrap {
+        display: flex
+    }
+
+    .bloggers-top-about--item {
+        padding: 30px 3.6% 0 112px;
+        width: 33.3%;
+        min-width: 298px
+    }
+
+    .kyb-table-filter--items {
+        margin: 0 auto;
+        width: 70%
+    }
+
+    .kyb-table-filter--items--with-sort {
+        width: calc(100%);
+        margin: 0;
+        text-align: left
+    }
+}
+
+@media (max-width: 425px) {
+    #bloggers-top-header {
+        text-align: left
+    }
+
+    #bloggers-top-header h2 {
+        font-size: 18px;
+        line-height: 24px
+    }
+
+    #bloggers-top-header--desc {
+        margin-top: 8px
+    }
+
+    #bloggers-top-about--link .kyb-quest-ico {
+        box-shadow: none;
+        font-weight: 400;
+        margin-left: -3px;
+        display: inline
+    }
+
+    #bloggers-top-about p {
+        line-height: 24px
+    }
+
+    #bloggers-top-about {
+        margin: 0 0 16px
+    }
+
+    .kyb-table-filter {
+        padding: 6px 16px;
+        margin: 0 -16px;
+        min-height: auto
+    }
+
+    #bloggers-top-search .kyb-input {
+        display: none
+    }
+
+    #bloggers-top-search.kyb-search-bar--form-focus {
+        width: 100%
+    }
+
+    #bloggers-top-search .fa-search {
+        display: block
+    }
+
+    #bloggers-top-last-upd {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center
+    }
+
+    .kyb-table-filter--item {
+        margin: 0;
+        float: none
+    }
+
+    .kyb-table-filter--item label {
+        display: none
+    }
+}
+
+@media (max-width: 320px) {
+    .bloggers-top-list--data-followers {
+        margin-right: 16px
+    }
+
+    .bloggers-top-list--data {
+        font-size: 13px
+    }
+}
+
+.bloggers-top-change-ttip:after {
+    margin-left: 0
+}
+
+.kyb-quest-ico {
+    box-shadow: 0 0 0 1px #ff6437 inset;
+    border-radius: 3px;
+    text-align: center;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    margin-left: 3px;
+    letter-spacing: 1px
+}
+
+.bloggers-top-ae-ttip.kyb-tooltip-target:after {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0
+}
+
+#hype-top-channel-switch {
+    text-align: center;
+    padding: 0 0 30px;
+    width: 100%
+}
+
+/*# sourceMappingURL=maps/top.css.map */
