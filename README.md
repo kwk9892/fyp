@@ -18,7 +18,8 @@ Team member
   - Sitemaps (accessible via https://insurtek.tech/sitemap_index/)
   - Automated Data Collection
   - AWS Lambda Serverless Architecture integration
-  - CI/CD Pipeline (via Github Actions) is integrated 
+  - CI/CD Pipeline (via Github Actions) is integrated
+  - Logging
 
 # Optimizations included
   - Website Speed Score https://gtmetrix.com/reports/insurtek.tech/ug36aAt8
