@@ -107,7 +107,7 @@ from PIL import Image
 import base64
 from django.contrib.auth.mixins import LoginRequiredMixin
 cache_page(None)
-class ClassificationView(LoginRequiredMixin, View):
+class ClassificationView(View):
     login_url = '/home/login/'
     def get(self, request):
         response = {}
