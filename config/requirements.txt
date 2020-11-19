@@ -13,3 +13,4 @@ imageai
 gunicorn==19.7.0
 gevent
 sklearn
+h5py==2.10.0
