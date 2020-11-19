@@ -8,12 +8,12 @@ import numpy as np
 import asyncio
 import httpx
 
-AWS_ENDPOINT = 'https://kdnjrlj6y4.execute-api.us-east-1.amazonaws.com/dev/get/data'
+AWS_ENDPOINT = 'https://ouxr4pirb3.execute-api.us-east-1.amazonaws.com/dev/get/data'
 INSTAGRAM_API_URL = 'https://instagram.com/{}/?__a=1'
 UPLOAD_PROFILE_ENDPOINT = 'https://insurtek.tech/api/profile/'
 UPLOAD_POST_ENDPOINT = 'https://insurtek.tech/api/post/'
-INSTAGRAM_USERNAME = 'Your ig username'
-INSTAGRAM_PASSWORD = 'your ig password'
+INSTAGRAM_USERNAME = 'username'
+INSTAGRAM_PASSWORD = 'password'
 
 
 def get_image_data(image_url):
@@ -40,6 +40,10 @@ def clean_profile_data(data, demographic_data):
     interests = json.dumps(demographic_data['interests'])
     demographic_data = json.dumps(demographic_data)
     
+    if not data:
+        print("No Data")
+        return {}
+
     profile_username = data['graphql']['user']['username']
     profile_metrics = demographic_data
     profile_interests = interests
@@ -147,7 +151,7 @@ async def upload_post_data(post_data:dict, client=None):
 
 async def gather_data(usernames, **kwargs):
     async with httpx.AsyncClient(**kwargs) as client:
-        gen_data_tasks = [get_generated_data(client=client) for i in range(len(usernames))]
+        gen_data_tasks = [get_generated_data(client=client) for _ in range(len(usernames))]
         profile_data_tasks = [get_instagram_profile_data(username, client=client) for username in usernames]
 
         gen_data_responses = await asyncio.gather(*gen_data_tasks)
@@ -207,12 +211,18 @@ if __name__ == '__main__':
         profile_post_data_lists = []
         posts_post_data_lists = []
         for index, profile in enumerate(profile_data_lists):
+            try:
+                post_details = profile['graphql']['user']['edge_owner_to_timeline_media']['edges']
+            except:
+                continue
             profile_post_data = clean_profile_data(profile, generated_data_lists[index])
-            profile_post_data_lists.append(profile_post_data)
-            post_details = profile['graphql']['user']['edge_owner_to_timeline_media']['edges']
+            if profile_post_data:
+                profile_post_data_lists.append(profile_post_data)
+            
             for index in range(len(post_details) -1, -1, -1):
                 posts_post_data = clean_post_data(post_details, profile_post_data, index)
                 posts_post_data_lists.append(posts_post_data)
+
 
                 
         headers = {

@@ -1,3 +1,5 @@
 **/config/certbot
 **/staticfiles/
+*.log
+*.zip
 *.pyc

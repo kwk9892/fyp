@@ -46,7 +46,6 @@ def instagram_profile_view(request, profile_username):
 
     interest_metrics = {}
 
-
     for metrics in profile_metrics['demographics']:
         for key, value in metrics['interest'].items():
             if(key in interest_metrics.keys()):
@@ -128,36 +127,36 @@ class ClassificationView(View):
             return HttpResponse("<h1>Params: image_url is empty</h1>")
         #response = self.get_post_data(image_url)
         
-        fp = BytesIO()
+        # fp = BytesIO()
 
-        img = Image.open(BytesIO(r.content))
-        img = img.resize((500,500))
-        img.save(fp, format='JPEG')
+        # img = Image.open(BytesIO(r.content))
+        # img = img.resize((500,500))
+        # img.save(fp, format='JPEG')
 
-        input_image_64 = base64.b64encode(fp.getvalue()).decode('ascii')
-        response['input'] = f'data:image/jpg;base64,{input_image_64}'
+        # input_image_64 = base64.b64encode(fp.getvalue()).decode('ascii')
+        # response['input'] = f'data:image/jpg;base64,{input_image_64}'
 
-        returned_image, detections = predictor.detectObjectsFromImage(input_image=files.File(fp),
-        input_type='stream',
-        output_type='array',
-        minimum_percentage_probability=30,
-        thread_safe=True)
+        # returned_image, detections = predictor.detectObjectsFromImage(input_image=files.File(fp),
+        # input_type='stream',
+        # output_type='array',
+        # minimum_percentage_probability=30,
+        # thread_safe=True)
 
-        img = Image.fromarray(returned_image, 'RGB')
-        data = BytesIO()
-        img.save(data, format='jpeg')
-        output_image_64 = base64.b64encode(data.getvalue()).decode('ascii')
+        # img = Image.fromarray(returned_image, 'RGB')
+        # data = BytesIO()
+        # img.save(data, format='jpeg')
+        # output_image_64 = base64.b64encode(data.getvalue()).decode('ascii')
 
-        response['output'] = f'data:image/jpg;base64,{output_image_64}'
-        response['detections'] = detections
-        response['msg'] = 'ok'
+        # response['output'] = f'data:image/jpg;base64,{output_image_64}'
+        # response['detections'] = detections
+        # response['msg'] = 'ok'
 
         return render(request, 'home/classification.html', response)
 
-    #def get_post_data(self, image_url):
-    #    url = f"https://insurtek.tech/api/classification/"
-    #    data = {"image_url": image_url}
-    #    return requests.post(url, data).json()
+    def get_post_data(self, image_url):
+        url = "https://insurtek.tech/api/classification/"
+        data = {"image_url": image_url}
+        return requests.post(url, data).json()
 
 
 import numpy as np
