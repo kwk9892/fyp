@@ -124,7 +124,7 @@ class ClassificationView(View):
         image_url = request.GET.get('image_url', None)
         if image_url is None or image_url == '':
             return HttpResponse("<h1>Params: image_url is empty</h1>")
-        #response = self.get_post_data(image_url)
+        response = self.get_post_data(image_url)
         
         # fp = BytesIO()
 
