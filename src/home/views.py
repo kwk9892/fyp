@@ -98,11 +98,6 @@ def instagram_profile_view(request, profile_username):
 #
 # Domain.com/classification
 #
-from phase.settings import predictor
-from django.core import files
-from io import BytesIO
-from PIL import Image 
-import base64
 from django.contrib.auth.mixins import LoginRequiredMixin
 cache_page(None)
 class ClassificationView(View):
@@ -203,7 +198,7 @@ class LoginView(View):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            send_email(request)
+            #send_email(request)
             return redirect(self.redirect_field_name)
         return self.get(request)
 
