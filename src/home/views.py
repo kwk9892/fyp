@@ -6,7 +6,6 @@ from django.db.models import Avg, Max
 from home.models import Profile, Post, ProfileStats
 from home.utils import get_random_colors
 from json import JSONDecodeError
-import datetime
 import json
 import bleach
 import requests
@@ -112,43 +111,13 @@ class ClassificationView(View):
         response = {}
         image_url = request.GET.get('image_url', None)
         if image_url is None or image_url == '':
+            response['msg'] = 'image_url must be a direct image link'
             return render(request, 'home/classification.html', response)
-            #return HttpResponse("<h1>Params: image_url is empty</h1>")
-        #response = self.get_post_data(image_url)
         try:
-            r = requests.get(image_url)
+            response = self.get_post_data(image_url)
         except:
             response['msg'] = 'We ran into some error.....'
             return render(request, 'home/classification.html', response)
-        fp = BytesIO()
-        image_url = request.GET.get('image_url', None)
-        if image_url is None or image_url == '':
-            return HttpResponse("<h1>Params: image_url is empty</h1>")
-        response = self.get_post_data(image_url)
-        
-        # fp = BytesIO()
-
-        # img = Image.open(BytesIO(r.content))
-        # img = img.resize((500,500))
-        # img.save(fp, format='JPEG')
-
-        # input_image_64 = base64.b64encode(fp.getvalue()).decode('ascii')
-        # response['input'] = f'data:image/jpg;base64,{input_image_64}'
-
-        # returned_image, detections = predictor.detectObjectsFromImage(input_image=files.File(fp),
-        # input_type='stream',
-        # output_type='array',
-        # minimum_percentage_probability=30,
-        # thread_safe=True)
-
-        # img = Image.fromarray(returned_image, 'RGB')
-        # data = BytesIO()
-        # img.save(data, format='jpeg')
-        # output_image_64 = base64.b64encode(data.getvalue()).decode('ascii')
-
-        # response['output'] = f'data:image/jpg;base64,{output_image_64}'
-        # response['detections'] = detections
-        # response['msg'] = 'ok'
 
         return render(request, 'home/classification.html', response)
 
