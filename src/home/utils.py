@@ -28,5 +28,5 @@ def send_email(request):
         f'{msg_content}',
         DEFAULT_FROM_EMAIL,
         [email],
-        fail_silently=False,
+        fail_silently=True,
     )
