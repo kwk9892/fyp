@@ -55,7 +55,7 @@ class ProfileStats(models.Model):
     objects = ProfileStatsManager()
 
     def __str__(self):
-        return self.profile_username
+        return str(self.profile_username)
 
     def get_absolute_url(self):
         return reverse('instagram_profile_view', args=[self.profile_username])
