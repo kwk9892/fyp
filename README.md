@@ -8,6 +8,7 @@
 Team member
 - Kong Woon Kit
 - Lee Jia Shun
+- Jason Tan
 
 # Features
   - Predict product category based on search term (89% accuracy)
