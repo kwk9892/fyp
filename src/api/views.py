@@ -39,7 +39,7 @@ class ProfilesAPI(APIView):
         if(not profile_serializer.is_valid()):
             response['msg'] = profile_serializer.errors
             return Response(response)
-        
+
         profile, created = Profile.objects.update_or_create(
             profile_username=profile_serializer.validated_data.get('profile_username'),
             defaults=profile_serializer.validated_data)
@@ -76,9 +76,9 @@ class PostsAPI(APIView):
 
     def post(self, request, format=None):
         response = {}
-        
+
         post_data = request.data
-        
+
         if(post_data.get('post_er', None) is None):
             try:
                 prof = ProfileStats.objects.filter(profile_username=post_data['profile_username']).latest('profile_stats_id')
@@ -88,10 +88,10 @@ class PostsAPI(APIView):
                 post_data['post_er'] =  float(post_likes+post_comments)/float(prof_followers) # Post_er (likes + comments)/Total followers
             except ProfileStats.DoesNotExist:
                 pass
-        
+
         if(post_data.get('post_image')):
             post_data['post_image_category'] = self.get_image_data(post_data.get("post_image"))
-            
+
         post_serializer = PostSerializer(data=post_data)
         if(not post_serializer.is_valid()):
             return Response(post_serializer.errors)
@@ -109,7 +109,7 @@ class PostsAPI(APIView):
     def get_image_data(self, image_url):
         """
             Returns: (str) predicted image class
-            Accepts: (str) an image direct link 
+            Accepts: (str) an image direct link
         """
         local_api_url = 'http://0.0.0.0:8000/api/classification/'
         #local_api_url = 'https://insurtek.tech/api/classification'
@@ -133,14 +133,14 @@ import requests
 from phase.settings import predictor
 from django.core import files
 from io import BytesIO
-from PIL import Image 
+from PIL import Image
 import base64
 
 class ImageAPI(APIView):
     def post(self, request):
         image_url = request.POST.get('image_url', None)
         response = {}
-        
+
         if image_url is None or image_url == '':
             response['msg'] = 'error'
             return Response(response)
@@ -160,11 +160,12 @@ class ImageAPI(APIView):
         input_image_64 = base64.b64encode(fp.getvalue()).decode('ascii')
         response['input'] = f'data:image/jpg;base64,{input_image_64}'
 
-        returned_image, detections = predictor.detectObjectsFromImage(input_image=files.File(fp),
-        input_type='stream',
-        output_type='array',
-        minimum_percentage_probability=30,
-        thread_safe=True)
+        returned_image, detections = predictor.detectObjectsFromImage(
+            input_image=files.File(fp),
+            input_type='stream',
+            output_type='array',
+            minimum_percentage_probability=30,
+            thread_safe=True)
 
         img = Image.fromarray(returned_image, 'RGB')
         data = BytesIO()

@@ -1,7 +1,7 @@
-try:
-   import unzip_requirements
-except ImportError:
-   pass
+# try:
+#    import unzip_requirements
+# except ImportError:
+#    pass
 
 import json
 import random
@@ -32,7 +32,7 @@ def gen_data():
         "57 - 64",
         "65++"
     ]
-    
+
     classes = ['Automotive', 'Beauty', 'Cell Phones and Accessories',
                 'Electronics', 'Health and Personal Care', 'Home and Kitchen',
                 'Pet Supplies', 'Sports and Outdoors', 'Toys and Games']

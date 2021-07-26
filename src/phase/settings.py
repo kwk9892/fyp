@@ -23,10 +23,10 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 SECRET_KEY = os.environ.get('SECRET_KEY', 'asdasdsadas')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 DOMAIN = os.environ.get('DOMAIN', '')
-ALLOWED_HOSTS = [DOMAIN, "0.0.0.0"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -94,10 +94,10 @@ CACHES = {
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-if os.environ.get('GITHUB_WORKFLOW'):
+if DEBUG:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql', 
+            'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ.get('MYSQL_DATABASE', 'fyp'),
             'USER': os.environ.get('MYSQL_USER', 'root'),
             'PASSWORD': os.environ.get('MYSQL_PASSWORD', ''),
@@ -108,7 +108,7 @@ if os.environ.get('GITHUB_WORKFLOW'):
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql', 
+            'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ.get('MYSQL_DATABASE', 'fyp'),
             'USER': os.environ.get('MYSQL_USER', 'root'),
             'PASSWORD': os.environ.get('MYSQL_PASSWORD', ''),

@@ -40,5 +40,5 @@ urlpatterns = [
     path('home/', include('home.urls', namespace='home')),
     path('instagram/<str:profile_username>', cache_page(None)(instagram_profile_view), name='instagram_profile_view'),
     path('classification', cache_page(None)(ClassificationView.as_view()), name='classification_view'),
-    
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

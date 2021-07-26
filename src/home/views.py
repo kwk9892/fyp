@@ -27,7 +27,7 @@ def index_view(request):
     return redirect('instagram_profile_view', profile_username=profile_username)
 
 
-# 
+#
 # Domain.com/instagram/<username>/
 #
 cache_page(None)
@@ -41,7 +41,7 @@ def instagram_profile_view(request, profile_username):
 
     profile_metrics = json.loads(Profile.objects.get(profile_username=profile_username).profile_metrics)
     posts = Post.objects.filter(profile_username=profile_username).order_by('-post_id')[:total_post_to_filter]
-    random_profiles = ProfileStats.objects.get_random_profiles(n=10)
+    random_profiles = ProfileStats.objects.get_random_profiles(n=1)
 
     interest_metrics = {}
 
@@ -70,7 +70,10 @@ def instagram_profile_view(request, profile_username):
     average_post_er = Post.objects.filter(profile_username=profile_username).order_by('-post_id')[:total_post_to_filter].aggregate(Avg('post_er'))['post_er__avg']
     average_post_likes = Post.objects.filter(profile_username=profile_username).order_by('-post_id')[:total_post_to_filter].aggregate(Avg('post_likes_count'))['post_likes_count__avg']
     average_post_comments = Post.objects.filter(profile_username=profile_username).order_by('-post_id')[:total_post_to_filter].aggregate(Avg('post_comments_count'))['post_comments_count__avg']
-    average_likes_to_comment = average_post_likes / average_post_comments
+    try:
+        average_likes_to_comment = average_post_likes / average_post_comments
+    except:
+        average_likes_to_comment = 0
     #Profile stats
     try:
         daily_growth_rate = (profiles[0].profile_followers - profiles[1].profile_followers)/profiles[1].profile_followers * 100
@@ -108,23 +111,23 @@ class ClassificationView(View):
         if image_url is None or image_url == '':
             response['msg'] = 'image_url must be a direct image link'
             return render(request, 'home/classification.html', response)
-        try:
-            response = self.get_post_data(image_url)
-        except:
-            response['msg'] = 'We ran into some error.....'
-            return render(request, 'home/classification.html', response)
+        #try:
+        response = self.get_post_data(image_url)
+        #except:
+            #response['msg'] = 'We ran into some error.....'
+        return render(request, 'home/classification.html', response)
 
         return render(request, 'home/classification.html', response)
 
     def get_post_data(self, image_url):
-        url = "https://insurtek.tech/api/classification/"
+        url = "http://127.0.0.1:8000/api/classification/"
         data = {"image_url": image_url}
         return requests.post(url, data).json()
 
 
 import numpy as np
 from phase.settings import text_class
-from tensorflow.keras.backend import set_session
+from tensorflow.compat.v1.keras.backend import set_session
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 cache_page(None)
 class SearchView(View):
@@ -135,7 +138,6 @@ class SearchView(View):
         if(search_term == None or search_term == ''):
             return render(request, 'home/index.html')
 
-        
         model = text_class.get_model()
         labels = text_class.get_encoder_classes()
         tokenizer = text_class.get_tokenizer()
@@ -150,7 +152,7 @@ class SearchView(View):
             padding='post',
             truncating='post'
            )
-        
+
         with text_class.get_graph.as_default():
             set_session(text_class.get_session())
             prediction = model.predict(padded_input)

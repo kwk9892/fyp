@@ -1,7 +1,7 @@
-from tensorflow import Session
-from tensorflow.compat.v1 import get_default_graph
+from tensorflow.compat.v1 import get_default_graph, Session
 from tensorflow.keras.models import load_model
-from tensorflow.keras.backend import set_session
+# from tensorflow.compat.v1.keras.models import load_model
+from tensorflow.compat.v1.keras.backend import set_session
 import pickle
 import os
 CLASSIFICATION_MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "text_classification.h5")
@@ -35,6 +35,6 @@ class TextClassification:
     def get_encoder_classes(self):
         return self.encoder.classes_
 
-    
 
-    
+
+

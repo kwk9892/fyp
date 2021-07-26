@@ -8,12 +8,13 @@ import numpy as np
 import asyncio
 import httpx
 
-AWS_ENDPOINT = 'https://ouxr4pirb3.execute-api.us-east-1.amazonaws.com/dev/get/data'
+# AWS_ENDPOINT = 'https://ouxr4pirb3.execute-api.us-east-1.amazonaws.com/dev/get/data'
+AWS_ENDPOINT = 'http://127.0.0.1:8000/data/'
 INSTAGRAM_API_URL = 'https://instagram.com/{}/?__a=1'
-UPLOAD_PROFILE_ENDPOINT = 'https://insurtek.tech/api/profile/'
-UPLOAD_POST_ENDPOINT = 'https://insurtek.tech/api/post/'
-INSTAGRAM_USERNAME = 'username'
-INSTAGRAM_PASSWORD = 'password'
+UPLOAD_PROFILE_ENDPOINT = 'http://127.0.0.1:8000/api/profile/'
+UPLOAD_POST_ENDPOINT = 'http://127.0.0.1:8000/api/post/'
+INSTAGRAM_USERNAME = 'testacc_0023'
+INSTAGRAM_PASSWORD = 'Testing@123'
 
 
 def get_image_data(image_url):
@@ -39,7 +40,7 @@ def clean_profile_data(data, demographic_data):
     demographic_data = json.loads(demographic_data)
     interests = json.dumps(demographic_data['interests'])
     demographic_data = json.dumps(demographic_data)
-    
+
     if not data:
         print("No Data")
         return {}
@@ -118,11 +119,62 @@ async def get_instagram_profile_data(username, client=None):
     data = resp.json()
     return data
 
+import json
+import random
+import numpy as np
 
+def endpoint(event=0, context=0):
+    body = {}
+    data, interest = gen_data()
+    body = {
+        "data": data,
+        "interest": interest
+    }
+
+    response = {
+        "statusCode": 200,
+        "body": body
+    }
+
+    return response['body']
+
+def gen_data():
+    identifiers = [
+        "18 - 24",
+        "25 - 32",
+        "33 - 40",
+        "41 - 48",
+        "49 - 56",
+        "57 - 64",
+        "65++"
+    ]
+
+    classes = ['Automotive', 'Beauty', 'Cell Phones and Accessories',
+                'Electronics', 'Health and Personal Care', 'Home and Kitchen',
+                'Pet Supplies', 'Sports and Outdoors', 'Toys and Games']
+    random_cat = random.sample(classes, 5)
+    # top 3 interest
+
+    data_list = []
+    for identifier in identifiers:
+        normal_dist = np.random.dirichlet(np.ones(5), size=1)[0]
+
+        normal_dist = [round(dist*100, 2) for dist in normal_dist]
+
+        male_prob = random.uniform(25, 75)
+        female_prob = 100 - male_prob
+        data = {}
+        data['identifier'] = identifier
+        data['male'] = male_prob
+        data['female'] = female_prob
+        data['interest'] = { k: v for k, v in zip(random_cat, normal_dist)}
+        data_list.append(data)
+    interest = sorted(zip(normal_dist, random_cat), reverse=True)[:3]
+    return data_list, interest
 
 async def get_generated_data(client=None):
-    resp = await client.get(AWS_ENDPOINT)
-    generated_data = resp.json()
+    resp = endpoint()
+    generated_data = resp
     demo, interest = generated_data['data'], generated_data['interest']
     interests = ", ".join([category for value, category in interest])
     demographic_data = {
@@ -218,13 +270,13 @@ if __name__ == '__main__':
             profile_post_data = clean_profile_data(profile, generated_data_lists[index])
             if profile_post_data:
                 profile_post_data_lists.append(profile_post_data)
-            
+
             for index in range(len(post_details) -1, -1, -1):
                 posts_post_data = clean_post_data(post_details, profile_post_data, index)
                 posts_post_data_lists.append(posts_post_data)
 
 
-                
+
         headers = {
             'Content-Type': 'application/json',
         }
