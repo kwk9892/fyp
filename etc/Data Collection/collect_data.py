@@ -7,6 +7,11 @@ import random
 import numpy as np
 import asyncio
 import httpx
+#
+# Develop API
+# SQL query data using ORM
+# AWS (EC2), didn't RDS, S3
+# CI/CD - Github Actions
 
 # AWS_ENDPOINT = 'https://ouxr4pirb3.execute-api.us-east-1.amazonaws.com/dev/get/data'
 AWS_ENDPOINT = 'http://127.0.0.1:8000/data/'
